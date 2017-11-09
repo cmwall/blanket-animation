@@ -44,7 +44,38 @@ The default settings will be applied to the children of the BlanketAnimation com
 
 ## Settings
 
-If the default animation does not interest you, you can pass in your own keyframe animation as well as other settings.
+If the default animation does not interest you, you can pass in your own keyframe animation as well as other settings as props.
+
+### Animation
+
+This is the keyframe animation that you want applied to the children. It should be a **multiline string** with only the keyframe object.
+
+**DO NOT SUPPLY THE KEYFRAME KEYWORD OR THE NAME OF THE ANIMATION**.
+
+#### Default:
+
+```jsx
+`{
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}`
+```
+
+#### Example value:
+
+```jsx
+`{
+  0% { opacity: 0; transform: translateX(-1000px) translateY(-400px);  }
+  50% { opacity: 0.5; transform: translateX(200px) translateY(200px); }
+  80% { opacity: 0.5; transform: translateX(-50px) translateY(-50px); }
+  100% { opacity: 1; transform: translateX(0) translateY(0);}
+}`
+```
+
+This will produce something like:
+
+<img src="https://github.com/cmwall/blanket-animation/raw/master/static/crazy-animation.gif" alt="Custom Animation" style="width: 250px; height: 250px;"/>
+
 
 | Key                  | Default                                                                                              | Example Value                                                                                                                                                                                                                                                                       | Explanation                                                                                                                                                                                                                                                                                                                                                                                                               |
 |----------------------|------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
