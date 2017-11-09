@@ -54,7 +54,7 @@ This is the keyframe animation that you want applied to the children. It should 
 
 Default:
 
-```jsx
+```js
 `{
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -63,7 +63,7 @@ Default:
 
 Example value:
 
-```jsx
+```js
 `{
   0% { opacity: 0; transform: translateX(-1000px) translateY(-400px);  }
   50% { opacity: 0.5; transform: translateX(200px) translateY(200px); }
@@ -98,9 +98,9 @@ This will produce something like:
 
 This is the name of your animation (in CSS). It is a plain string. The default animation name will almost always suffice but you may specify it here if you need.
 
-Default: "blanketAnimationFadeIn"
+Default: `"blanketAnimationFadeIn"`
 
-Example value: "customAnimationName"
+Example value: `"customAnimationName"`
 
 Example usage:
 
@@ -116,9 +116,9 @@ Example usage:
 
 How long to delay the start of the animation (in seconds).
 
-Default: 0
+Default: `0`
 
-Example value: 2.5
+Example value: `2.5`
 
 Example usage:
 
