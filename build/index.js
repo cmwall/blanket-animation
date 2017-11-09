@@ -84,47 +84,54 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var defaultAnimation = "{\n  from { opacity: 0; transform: translateY(-10px); }\n  to { opacity: 1; transform: translateY(0); }\n}";
+
 exports.default = function (_ref) {
   var children = _ref.children,
-      animation = _ref.animation,
-      animationDelay = _ref.animationDelay,
-      animationDuration = _ref.animationDuration,
-      animationDelayOffset = _ref.animationDelayOffset,
-      initialStyle = _ref.initialStyle;
+      _ref$animation = _ref.animation,
+      animation = _ref$animation === undefined ? defaultAnimation : _ref$animation,
+      _ref$animationName = _ref.animationName,
+      animationName = _ref$animationName === undefined ? "blanketAnimationFadeIn" : _ref$animationName,
+      _ref$animationDelay = _ref.animationDelay,
+      animationDelay = _ref$animationDelay === undefined ? 0 : _ref$animationDelay,
+      _ref$animationDuratio = _ref.animationDuration,
+      animationDuration = _ref$animationDuratio === undefined ? 1 : _ref$animationDuratio,
+      _ref$animationDelayOf = _ref.animationDelayOffset,
+      animationDelayOffset = _ref$animationDelayOf === undefined ? 0.1 : _ref$animationDelayOf,
+      _ref$initialStyle = _ref.initialStyle,
+      initialStyle = _ref$initialStyle === undefined ? animation === defaultAnimation && { opacity: 0 } : _ref$initialStyle;
 
-  var styleSheet = document.styleSheets[0];
+  if (children) {
+    var styleSheet = document.styleSheets[0];
+    var appliedAnimation = "@keyframes " + animationName + " " + animation;
+    styleSheet.insertRule(appliedAnimation, styleSheet.cssRules.length);
 
-  styleSheet.insertRule(animation || defaultAnimation, styleSheet.cssRules.length);
+    return _react2.default.Children.map(children, function (child, index) {
+      if (child) {
+        var animationStyle = Object.assign({
+          animationName: animationName,
+          animationDuration: animationDuration + "s",
+          animationDelay: animationDelay + index * animationDelayOffset + "s",
+          animationFillMode: "forwards"
+        }, initialStyle || {});
 
-  return children ? _react2.default.Children.map(children, function (child, index) {
-    return child && _react2.default.cloneElement(child, {
-      style: _extends({}, child.props.style, animatorStyle(index, animation, animationDelay, animationDuration, animationDelayOffset, initialStyle))
+        return _react2.default.cloneElement(child, {
+          style: Object.assign({}, child.props.style, animationStyle)
+        });
+      } else {
+        return "";
+      }
     });
-  }) : "";
+  } else {
+    return "";
+  }
 };
-
-var animatorStyle = function animatorStyle(index) {
-  var animation = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultAnimation;
-  var animationDelay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-  var animationDuration = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
-  var animationDelayOffset = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0.1;
-  var initialStyle = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : animation === defaultAnimation && { opacity: 0 };
-  return _extends({
-    animation: animation + " " + animationDuration + "s",
-    animationDelay: animationDelay + index * animationDelayOffset + "s",
-    animationFillMode: "forwards"
-  }, initialStyle);
-};
-
-var defaultAnimation = "@-webkit-keyframes fadeIn {\n  from { opacity: 0; transform: translateY(-10px); }\n  to { opacity: 1; transform: translateY(0); }\n}";
 
 /***/ })
 /******/ ]);
