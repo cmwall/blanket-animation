@@ -1,0 +1,23 @@
+{
+  "name": "blanketanimation",
+  "version": "1.0.0",
+  "description": "React wrapper component for applying staggered animations to children.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmwall/BlanketAnimation.git"
+  },
+  "keywords": [
+    "react",
+    "animation"
+  ],
+  "author": "Cody Wall <cody@cmwall.io> (https://cmwall.io)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cmwall/BlanketAnimation/issues"
+  },
+  "homepage": "https://github.com/cmwall/BlanketAnimation#readme"
+}
