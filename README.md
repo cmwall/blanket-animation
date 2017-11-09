@@ -52,7 +52,7 @@ This is the keyframe animation that you want applied to the children. It should 
 
 **DO NOT SUPPLY THE KEYFRAME KEYWORD OR THE NAME OF THE ANIMATION**.
 
-#### Default:
+Default:
 
 ```jsx
 `{
@@ -61,7 +61,7 @@ This is the keyframe animation that you want applied to the children. It should 
 }`
 ```
 
-#### Example value:
+Example value:
 
 ```jsx
 `{
@@ -72,10 +72,63 @@ This is the keyframe animation that you want applied to the children. It should 
 }`
 ```
 
+Example usage:
+
+```jsx
+<BlanketAnimation
+  animation={`{
+    0% { opacity: 0; transform: translateX(-1000px) translateY(-400px);  }
+    50% { opacity: 0.5; transform: translateX(200px) translateY(200px); }
+    80% { opacity: 0.5; transform: translateX(-50px) translateY(-50px); }
+    100% { opacity: 1; transform: translateX(0) translateY(0);}
+  }`}
+>
+  <p>1</p>
+  <p>2</p>
+  <p>3</p>
+</BlanketAnimation>
+```
+
 This will produce something like:
 
 <img src="https://github.com/cmwall/blanket-animation/raw/master/static/crazy-animation.gif" alt="Custom Animation" style="width: 250px; height: 250px;"/>
 
+
+### Animation Name
+
+This is the name of your animation (in CSS). It is a plain string. The default animation name will almost always suffice but you may specify it here if you need.
+
+Default: "blanketAnimationFadeIn"
+
+Example value: "customAnimationName"
+
+Example usage:
+
+```jsx
+<BlanketAnimation animationName="customAnimationName">
+  <p>1</p>
+  <p>2</p>
+  <p>3</p>
+</BlanketAnimation>
+```
+
+### Animation Delay
+
+How long to delay the start of the animation (in seconds).
+
+Default: 0
+
+Example value: 2.5
+
+Example usage:
+
+```jsx
+<BlanketAnimation animationDelay={2.5}>
+  <p>1</p>
+  <p>2</p>
+  <p>3</p>
+</BlanketAnimation>
+```
 
 | Key                  | Default                                                                                              | Example Value                                                                                                                                                                                                                                                                       | Explanation                                                                                                                                                                                                                                                                                                                                                                                                               |
 |----------------------|------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
