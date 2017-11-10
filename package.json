@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cmwall/BlanketAnimation.git"
+    "url": "git+https://github.com/cmwall/blanket-animation.git"
   },
   "keywords": [
     "react",
