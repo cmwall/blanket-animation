@@ -1,8 +1,9 @@
 {
   "name": "blanket-animation",
-  "version": "1.0.1",
-  "description": "React wrapper component for applying staggered animations to children.",
-  "main": "src/index.js",
+  "version": "1.0.3",
+  "description":
+    "React wrapper component for applying staggered animations to children.",
+  "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --watch",
@@ -12,10 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/cmwall/blanket-animation.git"
   },
-  "keywords": [
-    "react",
-    "animation"
-  ],
+  "keywords": ["react", "animation"],
   "author": "Cody Wall <cody@cmwall.io> (https://cmwall.io)",
   "license": "ISC",
   "bugs": {
