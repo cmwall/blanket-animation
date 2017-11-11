@@ -112,7 +112,7 @@ Example usage:
 </BlanketAnimation>
 ```
 
-### Animation Delay
+### Delay
 
 How long to delay the start of the animation (in seconds).
 
@@ -123,14 +123,14 @@ Example value: `2.5`
 Example usage:
 
 ```jsx
-<BlanketAnimation animationDelay={2.5}>
+<BlanketAnimation delay={2.5}>
   <p>1</p>
   <p>2</p>
   <p>3</p>
 </BlanketAnimation>
 ```
 
-### Animation Duration
+### Duration
 
 How long the animation will execute for each child component.
 
@@ -141,14 +141,14 @@ Example value: `0.3`
 Example usage:
 
 ```jsx
-<BlanketAnimation animationDuration={0.3}>
+<BlanketAnimation duration={0.3}>
   <p>1</p>
   <p>2</p>
   <p>3</p>
 </BlanketAnimation>
 ```
 
-### Animation Delay Offset
+### Delay Offset
 
 How long the animations are delayed between each child. In other words, the delay between animation 1 starting and animation 2 starting.
 
@@ -159,7 +159,7 @@ Example value: `1`
 Example usage:
 
 ```jsx
-<BlanketAnimation animationDelayOffset={1}>
+<BlanketAnimation delayOffset={1}>
   <p>1</p>
   <p>2</p>
   <p>3</p>
@@ -188,6 +188,28 @@ Example usage:
 
 ```jsx
 <BlanketAnimation initialStyle={{ transform: "translateX(-100px)" }}>
+  <p>1</p>
+  <p>2</p>
+  <p>3</p>
+</BlanketAnimation>
+```
+
+### SSR
+
+If you are rendering your css through server-side rendering, you can set this prop to true.
+
+**THIS WILL NOT ADD THE ANIMATION TO THE STYLESHEET**. Instead, it will add only the animation name to the inline styles.
+
+**YOU SHOULD NAME YOUR KEYFRAME ANIMATION AND PASS THAT NAME IN**. When you set `ssr`, you should pass the name of the keyframe animation in as `animationName`.
+
+Default: `false`
+
+Example value: `true`
+
+Example usage: **note the animation name**
+
+```jsx
+<BlanketAnimation ssr animationName="exampleAnimationName">
   <p>1</p>
   <p>2</p>
   <p>3</p>
