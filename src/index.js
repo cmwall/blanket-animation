@@ -1,5 +1,12 @@
 import React from "react"
 
+const defaultAnimation = `{
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}`
+
+const defaultInitialStyle = { opacity: 0 }
+
 export default class BlanketAnimation extends React.Component {
   constructor(props) {
     super(props)
@@ -15,6 +22,14 @@ export default class BlanketAnimation extends React.Component {
   }
 
   applyAnimationStyles(child, index) {
+    const { animation, ssr, initialStyle } = this.props
+
+    let appliedInitialStyle =
+      (animation === defaultAnimation && !ssr) ||
+      (ssr && initialStyle !== defaultInitialStyle)
+        ? initialStyle
+        : {}
+
     const style = Object.assign(
       {},
       {
@@ -23,7 +38,7 @@ export default class BlanketAnimation extends React.Component {
         animationDuration: `${this.props.duration}s`,
         animationDelay: `${this.props.delay + index * this.props.delayOffset}s`,
         animationFillMode: "forwards",
-        ...this.props.initialStyle,
+        ...appliedInitialStyle,
       }
     )
 
@@ -46,10 +61,7 @@ BlanketAnimation.defaultProps = {
   delay: 0,
   duration: 1,
   delayOffset: 0.1,
-  initialStyle: { opacity: 0 },
-  animation: `{
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }`,
+  initialStyle: defaultInitialStyle,
+  animation: defaultAnimation,
   animationName: "blanketAnimationFadeIn",
 }

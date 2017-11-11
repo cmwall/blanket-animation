@@ -1,6 +1,6 @@
 {
   "name": "blanket-animation",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description":
     "React wrapper component for applying staggered animations to children.",
   "main": "build/index.js",
