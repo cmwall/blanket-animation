@@ -20,7 +20,7 @@ export default class BlanketAnimation extends React.Component {
       duration = defaultSettings.duration,
       delayOffset = defaultSettings.delayOffset,
       animationName = defaultSettings.animationName,
-      initialStyle = animation === defaultSettings.animation
+      initialStyle = this.props.animation === defaultSettings.animation
         ? defaultSettings.initialStyle
         : {},
     } = this.props
