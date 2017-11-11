@@ -1,19 +1,6 @@
 import React from "react"
 
 export default class BlanketAnimation extends React.Component {
-  static defaultProps = {
-    ssr: false,
-    delay: 0,
-    duration: 1,
-    delayOffset: 0.1,
-    initialStyle: { opacity: 0 },
-    animation: `{
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }`,
-    animationName: "blanketAnimationFadeIn",
-  }
-
   constructor(props) {
     super(props)
 
@@ -52,4 +39,17 @@ export default class BlanketAnimation extends React.Component {
       this.applyAnimationStyles(child, index)
     )
   }
+}
+
+BlanketAnimation.defaultProps = {
+  ssr: false,
+  delay: 0,
+  duration: 1,
+  delayOffset: 0.1,
+  initialStyle: { opacity: 0 },
+  animation: `{
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }`,
+  animationName: "blanketAnimationFadeIn",
 }
