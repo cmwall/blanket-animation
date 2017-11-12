@@ -6,13 +6,13 @@ const defaultAnimation = `{
 }`
 
 export default class BlanketAnimation extends React.Component {
-  state = {
-    animationFinished: [],
-    // array of booleans for each child to determine displaying animation styles
-  }
-
   constructor(props) {
     super(props)
+
+    this.state = {
+      animationFinished: [],
+      // array of booleans for each child to determine displaying animation styles
+    }
 
     const { ssr, animation, animationName } = this.props
 
