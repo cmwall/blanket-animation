@@ -5,14 +5,19 @@ const defaultAnimation = `{
   to { opacity: 1; transform: translateY(0); }
 }`
 
-const defaultInitialStyle = { opacity: 0 }
-
 export default class BlanketAnimation extends React.Component {
+  state = {
+    animationFinished: [],
+    // array of booleans for each child to determine displaying animation styles
+  }
+
   constructor(props) {
     super(props)
 
     const { ssr, animation, animationName } = this.props
 
+    // If not server side rendering and the document/stylesheet is available,
+    // apply the animation to the stylesheet
     if (!ssr && document && document.styleSheets[0]) {
       const styleSheet = document.styleSheets[0]
       const appliedAnimation = `@keyframes ${animationName} ${animation}`
@@ -21,24 +26,54 @@ export default class BlanketAnimation extends React.Component {
     }
   }
 
-  applyAnimationStyles(child, index) {
-    const { animation, ssr, initialStyle } = this.props
+  applyAnimationStyle(child, index) {
+    const {
+      initialStyle,
+      animationName,
+      duration,
+      delay,
+      delayOffset,
+    } = this.props
 
-    let appliedInitialStyle =
-      (animation === defaultAnimation && !ssr) ||
-      (ssr && initialStyle !== defaultInitialStyle)
-        ? initialStyle
-        : {}
+    // Merge original style with animation style with initial style
+    const style = Object.assign(
+      {},
+      {
+        ...child.props.style,
+        animationName: animationName,
+        animationDuration: `${duration}s`,
+        animationDelay: `${delay + index * delayOffset}s`,
+        animationFillMode: "forwards",
+        ...initialStyle,
+      }
+    )
+
+    // Animation finish time
+    const finishTime = (delay + index * delayOffset + duration) * 1000
+
+    // Set the animation finish boolean to true when the animation completes
+    setTimeout(
+      () =>
+        this.setState(prevState => {
+          let newAnimationFinished = prevState.animationFinished.slice()
+          newAnimationFinished[index] = true
+
+          return { animationFinished: newAnimationFinished }
+        }),
+      finishTime
+    )
+
+    return React.cloneElement(child, { style })
+  }
+
+  applyCompletionStyle(child, index) {
+    const { completionStyle } = this.props
 
     const style = Object.assign(
       {},
       {
         ...child.props.style,
-        animationName: this.props.animationName,
-        animationDuration: `${this.props.duration}s`,
-        animationDelay: `${this.props.delay + index * this.props.delayOffset}s`,
-        animationFillMode: "forwards",
-        ...appliedInitialStyle,
+        ...completionStyle,
       }
     )
 
@@ -50,9 +85,13 @@ export default class BlanketAnimation extends React.Component {
 
     if (!children) return ""
 
-    return React.Children.map(children, (child, index) =>
-      this.applyAnimationStyles(child, index)
-    )
+    return React.Children.map(children, (child, index) => {
+      if (this.state.animationFinished[index]) {
+        return this.applyCompletionStyle(child, index)
+      } else {
+        return this.applyAnimationStyle(child, index)
+      }
+    })
   }
 }
 
@@ -61,7 +100,8 @@ BlanketAnimation.defaultProps = {
   delay: 0,
   duration: 1,
   delayOffset: 0.1,
-  initialStyle: defaultInitialStyle,
+  initialStyle: { opacity: 0 },
+  completionStyle: {},
   animation: defaultAnimation,
   animationName: "blanketAnimationFadeIn",
 }

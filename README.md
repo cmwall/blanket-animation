@@ -42,6 +42,8 @@ Use the component to wrap items that you want to animate:
 
 The default settings will be applied to the children of the BlanketAnimation component. Your animation should look similar to the one on the first gif in this README.
 
+When using more than one `BlanketAnimation` on a page with different animations, make sure to pass the name of the animation for each individual animation. This is to ensure your animations do not conflict.
+
 ## Settings
 
 If the default animation does not interest you, you can pass in your own keyframe animation as well as other settings as props.
@@ -96,7 +98,7 @@ This will produce something like:
 
 ### Animation Name
 
-This is the name of your animation (in CSS). It is a plain string. The default animation name will almost always suffice but you may specify it here if you need.
+This is the name of your animation (in CSS). It is a plain string. You should pass unique animation names for unique animations. If you are intending on using the default animation, you do not need to pass this prop.
 
 Default: `"blanketAnimationFadeIn"`
 
@@ -170,7 +172,7 @@ Example usage:
 
 An object describing the initial styling of each child component.
 
-**THIS IS NOT SET BY DEFAULT IF YOU PASS YOUR OWN ANIMATION IN**. The reason for this is because the component cannot know exactly what you are animating. If you do not intend to animate opacity, we do not want to set the initial opacity to 0. Instead, if an animation is passed in, you must specify the initial style of each child component.
+Initial style is always applied by the default value unless passed in as a prop. **If you do not intend to add the initial style of opacity 0, you must pass your own style object in**.
 
 Default:
 
@@ -194,13 +196,43 @@ Example usage:
 </BlanketAnimation>
 ```
 
+### Completion Style
+
+An object describing the completion style of each child component.
+
+When the animation completes, what should the child component's style look like?
+
+This will be added as an inline style, so keep specificity in mind.
+
+Default:
+
+```js
+{}
+```
+
+Example value:
+
+```js
+{ transform: "translateX(-20px)" }
+```
+
+Example usage:
+
+```jsx
+<BlanketAnimation completionStyle={{ transform: "translateX(-20px)" }}>
+  <p>1</p>
+  <p>2</p>
+  <p>3</p>
+</BlanketAnimation>
+```
+
 ### SSR
 
 If you are rendering your css through server-side rendering, you can set this prop to true.
 
 **THIS WILL NOT ADD THE ANIMATION TO THE STYLESHEET**. Instead, it will add only the animation name to the inline styles.
 
-**YOU SHOULD NAME YOUR KEYFRAME ANIMATION AND PASS THAT NAME IN**. When you set `ssr`, you should pass the name of the keyframe animation in as `animationName`.
+**YOU SHOULD NAME YOUR KEYFRAME ANIMATION AND PASS THAT NAME IN**. When you set `ssr`, you should pass the name of the keyframe animation in as `animationName`. Otherwise, it will look for the default animation name of `blanketAnimationFadeIn`.
 
 Default: `false`
 
