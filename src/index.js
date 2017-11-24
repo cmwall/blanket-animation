@@ -18,7 +18,7 @@ export default class BlanketAnimation extends React.Component {
 
     // If not server side rendering and the document/stylesheet is available,
     // apply the animation to the stylesheet
-    if (!ssr && document && document.styleSheets[0]) {
+    if (!ssr && typeof document !== "undefined" && document.styleSheets[0]) {
       const styleSheet = document.styleSheets[0]
       const appliedAnimation = `@keyframes ${animationName} ${animation}`
 
